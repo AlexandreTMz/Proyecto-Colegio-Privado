@@ -1,14 +1,17 @@
 <?php
 class Persona
 {
-	//clase persona
-	private $id;
+	//NECESITO IMPROTAR LAS OTRAS CLASES 
 	private $nombres;
-	private $apellidos;
-	private $correo;
-	private $sexo;
+	private $apellidosP;
+	private $apellidosM;
+	private $numero_ducmento;
 	private $fecha_nacimiento;
-	private $dni;
+	private $sexo;
+	private $direccion;
+	private $telefono;
+	//private documento;
+	//private ecivil;
 
 	public function __GET($x)
 	{ 

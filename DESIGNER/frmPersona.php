@@ -8,8 +8,15 @@ $perDAO = new PersonaDAO();
 if(isset($_POST['guardar']))
 {
 	$per->__SET('nombres',          $_POST['nombres']);
-	$per->__SET('apellidos',        $_POST['apellidos']);
-	$per->__SET('dni', $_POST['dni']);
+	$per->__SET('apellidoP',        $_POST['apellidoP']);
+	$per->__SET('apellidoM',        $_POST['apellidoM']);
+	$per->__SET('numeroD',			$_POST['numeroD']);
+	$per->__SET('fechaNac',			$_POST['fechaNac']);
+	$per->__SET('sexo',				$_POST['sexo']);
+	$per->__SET('direccion', 		$_POST['direccion']);
+	$per->__SET('telefono', 		$_POST['telefono']);
+	$per->__SET('id_tDocu', 		$_POST['id_tDocu']);
+	$per->__SET('id_eCivil', 		$_POST['id_eCivil']);
 
 	$perDAO->Registrar($per);
 	header('Location: frmPersona.php');
@@ -22,40 +29,203 @@ if(isset($_POST['guardar']))
 <html lang="es">
 	<head>
 		<title>CRUD</title>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-	</head>
-    <body style="padding:15px;">
+        
+		<!--Import Google Icon Font-->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
+	</head>
+    <body>
+	
+
+
+
+	<div class="row">
+      
+      <div class="col s3">
+	  
+	  </div>
+      <div class="col s9">
+		<div class="col s12">
+			<h1 class="text-center">Formulario de ingreso de Personas</h1>
+		</div>
         <div class="pure-g">
             <div class="pure-u-1-12">
-
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post" class="pure-form pure-form-stacked" style="margin-bottom:30px;">
 
-                    <table style="width:500px;" border="0">
-                        <tr>
-                            <th style="text-align:left;">Nombre</th>
-                            <td><input type="text" name="nombres" value="" style="width:100%;" /></td>
+                    <table style="width:600px; border-collapse: collapse;" border="0" class="striped centered">
+                        <!--inicio de los nombres-->
+						<tr >
+                            <th style="text-align:left;" >Nombres</th>
+                            <td>
+							<div class="row">								
+								<div class="input-field col s12">
+								<i class="material-icons prefix">create</i>								
+									<input type="text" id="autocomplete-input1" name="nombres" class="autocomplete" require>
+									<label for="autocomplete-input1">Ingrese Nombres</label>
+								</div>							
+							</div>
+							</td>
                         </tr>
+
+						<!--Inicio de los apellidos Paternos-->
                         <tr>
-                            <th style="text-align:left;">Apellido</th>
-                            <td><input type="text" name="apellidos" value="" style="width:100%;" /></td>
+                            <th style="text-align:left;">Apellido Paterno</th>
+                            <td>
+							<div class="row">
+								<div class="input-field col s12">
+								<i class="material-icons prefix">create</i>									
+									<input require type="text" id="autocomplete-input2" name="apellidoP" class="autocomplete">
+									<label for="autocomplete-input2">Ingrese Apellido Paterno</label>
+								</div>								
+							</div>
+							</td>
                         </tr>
-                        <tr>
-                            <th style="text-align:left;">DNI</th>
-                            <td><input type="text" name="dni" value="" style="width:100%;" /></td>
+
+						<!--Inicio de los apellidos Maternos-->
+						<tr>
+                            <th style="text-align:left;">Apellido Materno</th>
+                            <td>				
+							<div class="row">
+							<div class="input-field col s12">			
+								<i class="material-icons prefix">create</i>						
+								<input require type="text" id="autocomplete-input4" name="apellidoM" class="autocomplete">
+								<label for="autocomplete-input4">Ingrese Apellido Materno</label>
+							</div>
+							</div>			
+							</td>
+
                         </tr>
+
+						<!--Inicio del tipo de documento-->
+						<tr>
+                            <th style="text-align:left;">Tipo de documento</th>
+                            <td>
+							<div class="input-field col s12" name="id_tDocu" id="id_tDocu">
+								<select>
+									<option value="" disabled selected>Seleccione documento</option>
+									<option value="1">DNI</option>
+									<option value="2">Carnet de Extranjeria</option>
+									<option value="3">Pasaporte</option>
+									<option value="4">Otros</option>
+								</select>
+								
+							</div>
+							</td>
+                        </tr>
+
+						<!--Inicio del numero del documento-->
                         <tr>
+                            <th style="text-align:left;">Número de documento</th>
+                            <td>
+								<div class="row">
+									<div class="input-field col s12">	
+									<i class="material-icons prefix">create</i>								
+										<input require type="text" id="autocomplete-input3" name="numeroD" class="autocomplete">
+										<label for="autocomplete-input3">Ingrese número</label>
+									</div>
+								</div>
+							</td>
+                        </tr>
+
+						<!--Inicio del sexo-->
+						<tr>
+                            <th style="text-align:left;">SEXO</th>
+                            <td>
+							<div class="row">
+							
+								<div class="input-field col s12" name="sexo">										
+									<select>
+										<option value="" disabled selected>Seleccione su sexo</option>
+										<option value="1">Varon</option>
+										<option value="2">Mujer</option>
+										<option value="3">otros</option>
+									</select>																		
+								</div>
+							</div>
+							</td>
+                        </tr>
+
+						<!--Inicio de la fecha de nacimiento-->
+						<tr>
+                            <th style="text-align:left;">FECHA DE NACIMIENTO</th>
+                            <td>
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="material-icons prefix">calendar_today</i>	
+									<input require id="fecha" type="text" name="fechaNac" class="datepicker">
+									<label for="fecha">Elige la fecha</label>
+								</div>
+							</div>
+							</td>
+                        </tr>
+                        
+
+						<!-- inicio de la direcion-->							
+						<tr>
+                            <th style="text-align:left;">Dirección</th>
+                            <td>
+							<div class="row">
+								<div class="input-field col s12">	
+									<i class="material-icons prefix">gps_fixed</i>								
+									<input require type="text" id="autocomplete-input5" name="direccion" class="autocomplete">
+									<label for="autocomplete-input5">Ingrese dirección</label>
+								</div>
+							</div>							
+							</td>
+
+                        </tr>
+
+						<!--inicio del telefono -->
+						<tr>
+                            <th style="text-align:left;">Teléfono</th>
+                            <td>	
+							<div class="row">
+								<div class="input-field col s12">	
+									<i class="material-icons prefix">smartphone</i>						
+									<input require type="text" id="autocomplete-input6" name="telefono" class="autocomplete">
+									<label for="autocomplete-input6">Ingrese Teléfono</label>
+								</div>
+							</div>						
+							</td>
+                        </tr>
+
+						<!--inicio del estado civil -->
+						<tr>
+                            <th style="text-align:left;">Estado Civil</th>
+                            <td>
+							<div class="input-field col s12" name="id_eCivil">
+								<select>
+									<option value="" disabled selected>Seleccione su estado</option>
+									<option value="1">Soltero/a</option>
+									<option value="2">Casado/a</option>
+									<option value="3">Divorciado/a</option>
+									<option value="4">viudo/a</option>
+								</select>
+								
+							</div>
+							</td>
+                        </tr>
+
                             <td colspan="2">
-																<input type="submit" value="GUARDAR" name="guardar"class="pure-button pure-button-primary">
-																<input type="submit" value="BUSCAR" name="buscar"class="pure-button pure-button-primary">
-                            </td>
+							<button class="btn waves-effect waves-light btn-large" type="submit" name="guardar">Guardar
+								<i class="material-icons left">save</i>
+							</button>
+							<button class="btn waves-effect waves-light btn-large" type="submit" name="buscar">Buscar
+								<i class="material-icons left">search</i>
+							</button>
+							</td>
                         </tr>
                     </table>
                 </form>
-
-
             </div>
         </div>
+	  </div>
+	  
+    </div>
+
+	
 
 				<!--ESTA CONDICION SIRVE PARA REALIZAR BUSQUEDA POR DNI-->
 
@@ -97,6 +267,54 @@ if(isset($_POST['guardar']))
 					<?php
 				}
 				?>
+	
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script>
+	   
 
-    </body>
+		document.addEventListener('DOMContentLoaded', function() {
+			//inciio del parallax
+			var elems = document.querySelectorAll('.parallax');
+    		var instances = M.Parallax.init(elems);
+			
+			//inicio del combo box
+			var elems = document.querySelectorAll('select');
+    		var instances = M.FormSelect.init(elems);
+
+			//inicio de la fecha
+    		var elems = document.querySelectorAll('.datepicker');
+			var instances = M.Datepicker.init(elems,{
+				format: 'dd mmmm, yyyy',
+				yearRange: 80,
+				i18n :{
+
+					months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+					monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+					weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+					weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+					weekdaysAbbrev:['D','L','M','M','J','V','S'],
+					selectMonths: true,
+					selectYears: 100, // Puedes cambiarlo para mostrar más o menos años
+					today: 'Hoy',
+					clear: 'Limpiar',
+					cancel: 'Cerrar',
+					done: 'Ok',
+					labelMonthNext: 'Siguiente mes',
+					labelMonthPrev: 'Mes anterior',
+					labelMonthSelect: 'Selecciona un mes',
+					labelYearSelect: 'Selecciona un año',
+				}
+			});
+ 		});
+
+		// Or with jQuery
+
+		$(document).ready(function(){
+			$('.datepicker').datepicker();
+		});
+      
+
+</script>
+</body>
 </html>

@@ -17,7 +17,7 @@ class CompetenciaDAO
 		try
 		{
 		$statement = $this->pdo->prepare("call up_insertar_competencia(?,?,?)");
-		$statement->bindParam(1,$competencias->__GET(''));
+		$statement->bindParam(1,$competencias->__GET('id'));
 		$statement->bindParam(2,$competencias->__GET('nombreCompetencia'));
 		$statement->bindParam(3,$competencias->__GET('numeroCo'));
 

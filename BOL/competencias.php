@@ -1,6 +1,7 @@
 <?php
 class Competencias
 {
+	private $id;
 	private $nombreCompetencia;
 	private $numeroCo;
 

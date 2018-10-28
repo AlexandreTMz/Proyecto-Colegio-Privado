@@ -1,25 +1,17 @@
 <?php
 require_once('../BOL/persona.php');
-require_once('../BOL/ECivil.php');
-require_once('../BOL/tipoDocumento.php');
 require_once('../DAO/personaDAO.php');
-require_once('../DAO/ECivilDAO.php');
-require_once('../DAO/TDocumentoDAO.php');
 
 $per = new Persona();
-$civ = new estadoCivil();
-$doc = new tipoDocumento(); 	
 $perDAO = new PersonaDAO();
-$civDAO = new CivilDao();
-$docDAO = new DocumentoDao();
 
 if(isset($_POST['guardar']))
 {
 	$per->__SET('nombres',          $_POST['nombres']);
 	$per->__SET('apellidoP',        $_POST['apellidoP']);
 	$per->__SET('apellidoM',        $_POST['apellidoM']);
-	$per->__SET('numero_documento',	$_POST['numeroD']);
-	$per->__SET('fecha_nacimiento',	$_POST['fechaNac']);
+	$per->__SET('numeroD',			$_POST['numeroD']);
+	$per->__SET('fechaNac',			$_POST['fechaNac']);
 	$per->__SET('sexo',				$_POST['sexo']);
 	$per->__SET('direccion', 		$_POST['direccion']);
 	$per->__SET('telefono', 		$_POST['telefono']);
@@ -42,8 +34,13 @@ if(isset($_POST['guardar']))
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<!--Import materialize.css-->
 		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
 	</head>
     <body>
+	
+	<div class="parallax-container">
+      <div class="parallax"><img src="images/slider-3.jpg"></div>
+    </div>
 
 
 
@@ -108,26 +105,13 @@ if(isset($_POST['guardar']))
 						<tr>
                             <th style="text-align:left;">Tipo de documento</th>
                             <td>
-							<div class="input-field col s12"  id="id_tDocu">
-								<select name="id_tDocu">
+							<div class="input-field col s12" name="id_tDocu" id="id_tDocu">
+								<select>
 									<option value="" disabled selected>Seleccione documento</option>
-									<?php
-				
-										$resultadoD = array();//VARIABLE TIPO RESULTADO					
-										$resultadoD = $docDAO->Listar_Documento(); //CARGAMOS LOS REGISTRO EN EL ARRAY RESULTADO
-										if(!empty($resultadoD)) //PREGUNTAMOS SI NO ESTA VACIO EL ARRAY
-										{										
-											foreach( $resultadoD as $r): //RECORREMOS EL ARRAY RESULTADO A TRAVES DE SUS CAMPOS
-									?>
-										<option value="<?php $r->__GET('id_tdocumento');?>"><?php echo $r->__GET('id_tdocumento').'- '.$r->__GET('tipo_documento'); ?></option>				
-									<?php			
-											endforeach;
-										}
-										else
-										{
-											echo 'no se encuentra en la base de datos!';
-										}
-									?>
+									<option value="1">DNI</option>
+									<option value="2">Carnet de Extranjeria</option>
+									<option value="3">Pasaporte</option>
+									<option value="4">Otros</option>
 								</select>
 								
 							</div>
@@ -152,10 +136,11 @@ if(isset($_POST['guardar']))
 						<tr>
                             <th style="text-align:left;">SEXO</th>
                             <td>
-							<div class="row">							
-								<div >										
-									<select name="sexo">
-										<option value="" disabled selected >Seleccione su sexo</option>
+							<div class="row">
+							
+								<div class="input-field col s12" name="sexo">										
+									<select>
+										<option value="" disabled selected>Seleccione su sexo</option>
 										<option value="1">Varon</option>
 										<option value="2">Mujer</option>
 										<option value="3">otros</option>
@@ -209,7 +194,7 @@ if(isset($_POST['guardar']))
 							</td>
                         </tr>
 
-						<!--inicio del estado civil 
+						<!--inicio del estado civil -->
 						<tr>
                             <th style="text-align:left;">Estado Civil</th>
                             <td>
@@ -220,36 +205,6 @@ if(isset($_POST['guardar']))
 									<option value="2">Casado/a</option>
 									<option value="3">Divorciado/a</option>
 									<option value="4">viudo/a</option>
-								</select>
-								
-							</div>
-							</td>
-                        </tr>
-						-->
-						<!-- ingresando datos a las listas de estado civil -->
-						<tr>
-                            <th style="text-align:left;">Estado Civil</th>
-                            <td>
-							<div class="input-field col s12" >
-								<select name="id_eCivil">
-									<option value="" disabled selected>Seleccione su estado</option>									
-									<?php
-				
-										$resultado = array();//VARIABLE TIPO RESULTADO					
-										$resultado = $civDAO->Listar_Civil(); //CARGAMOS LOS REGISTRO EN EL ARRAY RESULTADO
-										if(!empty($resultado)) //PREGUNTAMOS SI NO ESTA VACIO EL ARRAY
-										{										
-											foreach( $resultado as $r): //RECORREMOS EL ARRAY RESULTADO A TRAVES DE SUS CAMPOS
-									?>
-										<option value="<?php $r->__GET('id_ecivil');?>"><?php echo $r->__GET('id_ecivil').'- '.$r->__GET('estado_civil'); ?></option>				
-									<?php			
-											 endforeach;
-										}
-										else
-										{
-											echo 'no se encuentra en la base de datos!';
-										}
-									?>
 								</select>
 								
 							</div>
@@ -317,43 +272,6 @@ if(isset($_POST['guardar']))
 					<?php
 				}
 				?>
-
-
-
-				<?php
-				
-					$resultado = array();//VARIABLE TIPO RESULTADO					
-					$resultado = $civDAO->Listar_Civil(); //CARGAMOS LOS REGISTRO EN EL ARRAY RESULTADO
-					if(!empty($resultado)) //PREGUNTAMOS SI NO ESTA VACIO EL ARRAY
-					{						
-						?>
-						<table class="pure-table pure-table-horizontal">
-								<thead>
-										<tr>
-												<th style="text-align:left;">ID</th>
-												<th style="text-align:left;">Nombres</th>
-												
-										</tr>
-								</thead>
-						<?php
-						foreach( $resultado as $r): //RECORREMOS EL ARRAY RESULTADO A TRAVES DE SUS CAMPOS
-							?>
-								<tr>
-										<td><?php echo $r->__GET('id_ecivil'); ?></td>
-										<td><?php echo $r->__GET('estado_civil'); ?></td>
-										
-								</tr>
-						<?php endforeach;
-					}
-					else
-					{
-						echo 'no se encuentra en la base de datos!';
-					}
-					?>
-					</table>
-					<?php
-				
-				?>
 	
 <!--JavaScript at end of body for optimized loading-->
 <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -361,6 +279,9 @@ if(isset($_POST['guardar']))
 	   
 
 		document.addEventListener('DOMContentLoaded', function() {
+			//inciio del parallax
+			var elems = document.querySelectorAll('.parallax');
+    		var instances = M.Parallax.init(elems);
 			
 			//inicio del combo box
 			var elems = document.querySelectorAll('select');

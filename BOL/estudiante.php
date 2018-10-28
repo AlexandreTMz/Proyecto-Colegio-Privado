@@ -4,6 +4,11 @@ class Estudiante
 	private $id_persona;
 	private $codigo_estudiante;
 
+	// Constructor
+	public function __construct(){
+		$this->id_persona = new Persona();
+	}
+
 	public function __GET($x)
 	{ 
 		return $this->$x; 

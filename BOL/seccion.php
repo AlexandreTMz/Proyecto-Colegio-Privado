@@ -1,14 +1,14 @@
 <?php
-class Grado
+class Seccion
 {
-	private $id_grado;
-	private $grado;
+	private $id_seccion;
+	private $seccion;
 
 	public function __GET($x)
 	{
 		return $this->$x;
 	}
-	
+
 	public function __SET($x, $y)
 	{
 		return $this->$x = $y;

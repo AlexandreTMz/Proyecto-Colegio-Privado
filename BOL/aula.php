@@ -1,22 +1,21 @@
 <?php
 class Aula
 {
-	private $idAula;
+	private $id_aula;
 	private $descripcion;
-	private $numeroAula;
-	private $numeroAlumno;
+	private $numero_aula;
+	private $numero_alumno;
 	private $turno;
-	private $idDocente;
-	private $idGrado;
-	private $idSeccion;
+	private $id_docente;
+	private $id_grado;
+	private $id_seccion;
 
-	public function __CONSTRUCT(){
-				$this->idDocente = new Docente();
-				$this->idGrado = new Grado();
-				$this->idSeccion = new Secciones();
-		//echo $this->ent -> __GET('id_competencia');
-		}
-
+	public function __CONSTRUCT()
+	{
+		$this->id_docente = new Docente();
+		$this->id_grado = new Grado();
+		$this->id_seccion = new Seccion();
+	}
 
 	public function __GET($x)
 	{

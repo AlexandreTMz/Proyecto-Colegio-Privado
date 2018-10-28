@@ -19,10 +19,10 @@ class Registro_calificacionDAO
 		$statement = $this->pdo->prepare("CALL up_insertar_Registro_calificacion(?,?,?,?,?,?)");
 		$statement->bindParam(1,$registro_calificacion->__GET('fecha'));
 		$statement->bindParam(2,$registro_calificacion->__GET('hora'));
-		$statement->bindParam(3,$registro_calificacion->__GET('id_periodo')->__GET('idperiodo'));
-		$statement->bindParam(4,$registro_calificacion->__GET('id_grado')->__GET('idgrado'));
-		$statement->bindParam(5,$registro_calificacion->__GET('id_seccion')->__GET('idseccion'));
-		$statement->bindParam(6,$registro_calificacion->__GET('id_docente')->__GET('iddocente'));
+		$statement->bindParam(3,$registro_calificacion->__GET('id_periodo')->__GET('id_periodo'));
+		$statement->bindParam(4,$registro_calificacion->__GET('id_grado')->__GET('id_grado'));
+		$statement->bindParam(5,$registro_calificacion->__GET('id_seccion')->__GET('id_seccion'));
+		$statement->bindParam(6,$registro_calificacion->__GET('id_docente')->__GET('id_docente'));
 
         $statement->execute();
 
@@ -49,10 +49,10 @@ class Registro_calificacionDAO
 				$est->__SET('id_rcalificacion', $r->id_rcalificacion);
 				$est->__SET('fecha', $r->fecha);
 				$est->__SET('hora', $r->hora);
-				$est->__SET('id_periodo', $r->id_periodo);
-				$est->__SET('id_grado', $r->id_grado);
-				$est->__SET('id_seccion', $r->id_seccion);
-				$est->__SET('id_docente', $r->id_docente);
+				$est->__GET('id_periodo')->__SET('id_periodo', $r->id_periodo);
+				$est->__GET('id_grado')->__SET('id_grado', $r->id_grado);
+				$est->__GET('id_seccion')->__SET('id_seccion', $r->id_seccion);
+				$est->__GET('id_docente')->__SET('id_docente', $r->id_docente);
 				$result[] = $est;
 			}
 

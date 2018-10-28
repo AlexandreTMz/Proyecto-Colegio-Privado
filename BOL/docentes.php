@@ -1,4 +1,8 @@
 <?php
+
+require_once 'persona.php';
+require_once 'funcion.php';
+
 class Docente
 {
 

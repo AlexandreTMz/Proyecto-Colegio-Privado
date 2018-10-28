@@ -49,7 +49,7 @@ class AulaDAO
 				$aul->__SET('numero_aula', $r->numero_aula);
 				$aul->__SET('numero_alumno', $r->numero_alumno);
         $aul->__SET('turno', $r->turno);
-				$aul->__GET('id_docente')->__SET('id_docente', $r->id_docente);
+				$aul->__GET('id_docente')->__SET('id_persona', $r->id_persona);
 				$aul->__GET('id_grado')->__SET('id_grado', $r->id_grado);
 				$aul->__GET('id_seccion')->__SET('id_seccion', $r->id_seccion);
 

@@ -128,6 +128,51 @@ $resultado_seccion = $seccionDAO->Listar();
 		</div>
 	</div>
 
+	<?php
+	/*$resultado_aula = array();
+		$aul->__SET('idAula',          $_POST['idAula']);//ESTABLECEMOS EL VALOR DEL DNI
+		$resultado = $aulDAO->Listar($aul); //CARGAMOS LOS REGISTRO EN EL ARRAY RESULTADO
+		if(!empty($resultado)) //PREGUNTAMOS SI NO ESTA VACIO EL ARRAY
+		{*/
+			?>
+			<table class="pure-table pure-table-horizontal">
+					<thead>
+							<tr>
+									<th style="text-align:left;">Id Aula</th>
+									<th style="text-align:left;">Descripción</th>
+									<th style="text-align:left;">Número de Aula</th>
+									<th style="text-align:left;">Número de Alumno</th>
+									<th style="text-align:left;">Turno</th>
+									<th style="text-align:left;">Id Docente</th>
+									<th style="text-align:left;">Id Grado</th>
+									<th style="text-align:left;">Id Seccion</th>
+							</tr>
+					</thead>
+			<?php
+			//foreach( $resultado as $r): //RECORREMOS EL ARRAY RESULTADO A TRAVES DE SUS CAMPOS
+				?>
+					<tr>
+							<!--<td><?php echo $r->__GET('idAula'); ?></td>
+							<td><?php echo $r->__GET('descripcion'); ?></td>
+							<td><?php echo $r->__GET('numeroAula'); ?></td>
+							<td><?php echo $r->__GET('numeroAlumno'); ?></td>
+							<td><?php echo $r->__GET('turno'); ?></td>
+							<td><?php echo $r->__GET('idDocente'); ?></td>
+							<td><?php echo $r->__GET('idGrado'); ?></td>
+							<td><?php echo $r->__GET('idSeccion'); ?></td>-->
+					</tr>
+			<?php /*endforeach;
+		}
+		else
+		{
+			echo 'no se encuentra en la base de datos!';
+		}*/
+		?>
+		</table>
+		<?php
+	//}
+	?>
+
 				<!--ESTA CONDICION SIRVE PARA REALIZAR BUSQUEDA POR DNI-->
 
 				<?php

@@ -1,5 +1,5 @@
 <?php
-require_once 'docente.php';
+require_once 'docentes.php';
 require_once 'grado.php';
 require_once 'seccion.php';
 
@@ -16,7 +16,7 @@ class Aula
 
 	public function __CONSTRUCT()
 	{
-		$this->id_docente = new Docente();
+		$this->id_docente = new Docentes();
 		$this->id_grado = new Grado();
 		$this->id_seccion = new Seccion();
 	}

@@ -22,9 +22,12 @@ class AulaDAO
 		$statement->bindParam(3,$aula->__GET('numeroAula'));
 		$statement->bindParam(4,$aula->__GET('numeroAlumno'));
 		$statement->bindParam(5,$aula->__GET('turno'));
-		$statement->bindParam(6,$aula->__GET('idDocente'));
+/*		$statement->bindParam(6,$aula->__GET('idDocente'));
 		$statement->bindParam(7,$aula->__GET('idGrado'));
-		$statement->bindParam(8,$aula->__GET('idSeccion'));
+		$statement->bindParam(8,$aula->__GET('idSeccion'));*/
+		$statement->bindParam(6,$aula->__GET('idDocente')->__GET('id_docente'));
+	  $statement->bindParam(7,$aula->__GET('idGrado')->__GET('id_grado'));
+		$statement->bindParam(8,$aula->__GET('idSeccion')->__GET('id_competencia'));
     $statement -> execute();
 
 		} catch (Exception $e)
@@ -52,10 +55,12 @@ class AulaDAO
 				$aul->__SET('numeroAula', $r->numero_aula);
 				$aul->__SET('numeroAlumno', $r->numero_alumnos);
         $aul->__SET('turno', $r->turno);
-        $aul->__SET('idDocente', $r->id_docente);
+/*        $aul->__SET('idDocente', $r->id_docente);
         $aul->__SET('idGrado', $r->id_grado);
-        $aul->__SET('idSeccion', $r->id_seccion);
-
+        $aul->__SET('idSeccion', $r->id_seccion);*/
+				$aul->__GET('idDocente')->__SET('id_docente', $r->id_docente);
+				$aul->__GET('idGrado')->__SET('id_grado', $r->id_grado);
+				$aul->__GET('idSeccion')->__SET('id_seccion', $r->id_seccion);
 				$result[] = $aul;
 			}
 

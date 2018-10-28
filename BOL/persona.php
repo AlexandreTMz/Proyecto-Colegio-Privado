@@ -1,6 +1,7 @@
 <?php
 class Persona
 {
+	private $id_persona;
 	private $nombres;
 	private $apellidosP;
 	private $apellidosM;

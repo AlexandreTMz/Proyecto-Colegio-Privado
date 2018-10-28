@@ -5,10 +5,19 @@ class matriculas
 	private $fecha;
 	private $repiete;
 	private $apoderado_parentesco;
+
 	private $id_estudiante;
 	private $id_apoderados;
 	private $id_grado;
 	private $id_aescolar;
+
+	// Constructor
+	public function __construct(){
+		$this->id_estudiante = new Estudiante();
+		$this->id_apoderados = new Apoderados();
+		$this->id_grado   = new Grado();
+		$this->id_aescolar  = new anios_escolares();
+	}
 
 	public function __GET($x)
 	{

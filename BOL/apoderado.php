@@ -7,6 +7,11 @@ class Apoderados
 	private $correo;
 	private $id_ninstruccion;
 
+	public function __construct(){
+		$this->id_persona = new Persona();
+		$this->id_ninstruccion = new Ninstruccion();
+	}
+
 	public function __GET($x)
 	{
 		return $this->$x;

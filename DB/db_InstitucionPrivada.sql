@@ -223,3 +223,28 @@ CREATE TABLE grados_cursos
   CONSTRAINT fk_grados_cursos_grados FOREIGN KEY (id_grado) REFERENCES grados(id_grado),
   CONSTRAINT fk_grados_cursos_cursos FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)
 );
+
+
+DELIMITER $$
+CREATE PROCEDURE up_listar_grado(
+)
+BEGIN
+	SELECT * FROM grados;
+END
+$$
+
+DELIMITER $$
+CREATE PROCEDURE up_listar_seccion(
+)
+BEGIN
+	SELECT * FROM secciones;
+END
+$$
+
+DELIMITER $$
+CREATE PROCEDURE up_listar_aulas(
+)
+BEGIN
+	SELECT * FROM aulas a INNER JOIN docentes d ON a.id_docente = d.id_persona INNER JOIN grados g ON a.id_grado = g.id_grado INNER JOIN secciones s ON a.id_seccion = s.id_seccion INNER JOIN personas p ON d.id_persona = p.id_persona;
+END
+$$

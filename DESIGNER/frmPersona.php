@@ -38,6 +38,9 @@ if(isset($_POST['guardar']))
 	</head>
     <body>
 	
+	<div class="parallax-container">
+      <div class="parallax"><img src="images/slider-3.jpg"></div>
+    </div>
 
 
 
@@ -224,7 +227,9 @@ if(isset($_POST['guardar']))
 	  </div>
 	  
     </div>
-
+	<div class="parallax-container">
+      <div class="parallax"><img src="images/slider-2.jpg"></div>
+    </div>	
 	
 
 				<!--ESTA CONDICION SIRVE PARA REALIZAR BUSQUEDA POR DNI-->

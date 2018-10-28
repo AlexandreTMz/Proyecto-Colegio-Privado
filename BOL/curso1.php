@@ -1,8 +1,8 @@
 <?php
-class Secciones
+class Curso
 {
-	private $id_seccion;
-	private $seccion;
+	private $id_curso;
+	private $curso;
 
 	public function __GET($x)
 	{

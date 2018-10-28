@@ -16,56 +16,51 @@ class AulaDAO
 	{
 		try
 		{
-		$statement = $this->pdo->prepare("CALL up_insertar_aulas(?,?,?,?,?,?,?,?)");
-    $statement->bindParam(1,$aula->__GET('idAula'));
-		$statement->bindParam(2,$aula->__GET('descripcion'));
-		$statement->bindParam(3,$aula->__GET('numeroAula'));
-		$statement->bindParam(4,$aula->__GET('numeroAlumno'));
-		$statement->bindParam(5,$aula->__GET('turno'));
-		$statement->bindParam(6,$aula->__GET('idDocente'));
-		$statement->bindParam(7,$aula->__GET('idGrado'));
-		$statement->bindParam(8,$aula->__GET('idSeccion'));
+		$statement = $this->pdo->prepare("CALL up_insertar_aulas(?,?,?,?,?,?,?)");
+		$statement->bindParam(1, $aula->__GET('descripcion'));
+		$statement->bindParam(2, $aula->__GET('numero_aula'));
+		$statement->bindParam(3, $aula->__GET('numero_alumno'));
+		$statement->bindParam(4, $aula->__GET('turno'));
+		$statement->bindParam(5, $aula->__GET('id_docente')->__GET('id_docente'));
+	  $statement->bindParam(6, $aula->__GET('id_grado')->__GET('id_grado'));
+		$statement->bindParam(7, $aula->__GET('id_seccion')->__GET('id_seccion'));
     $statement -> execute();
-
 		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
 	}
 
-	public function Listar(Aula $aula)
+	public function Listar()
 	{
 		try
 		{
 			$result = array();
 
-			$statement = $this->pdo->prepare("call up_buscar_aulas(?)");
-			$statement->bindParam(1,$aula->__GET('idAula'));
+			$statement = $this->pdo->prepare("call up_listar_aula()");
 			$statement->execute();
 
 			foreach($statement->fetchAll(PDO::FETCH_OBJ) as $r)
 			{
-							$aul = new Aula();
+				$aul = new Aula();
 
-		    $aul->__SET('idAula', $r->id_aula);
+		    $aul->__SET('id_aula', $r->id_aula);
 				$aul->__SET('descripcion', $r->descripcion);
-				$aul->__SET('numeroAula', $r->numero_aula);
-				$aul->__SET('numeroAlumno', $r->numero_alumnos);
+				$aul->__SET('numero_aula', $r->numero_aula);
+				$aul->__SET('numero_alumno', $r->numero_alumno);
         $aul->__SET('turno', $r->turno);
-        $aul->__SET('idDocente', $r->id_docente);
-        $aul->__SET('idGrado', $r->id_grado);
-        $aul->__SET('idSeccion', $r->id_seccion);
+				$aul->__GET('id_docente')->__SET('id_persona', $r->id_persona);
+				$aul->__GET('id_grado')->__SET('id_grado', $r->id_grado);
+				$aul->__GET('id_seccion')->__SET('id_seccion', $r->id_seccion);
 
 				$result[] = $aul;
 			}
 
 			return $result;
-		}
-		catch(Exception $e)
+		} catch(Exception $e)
 		{
 			die($e->getMessage());
 		}
 	}
 }
-
 ?>

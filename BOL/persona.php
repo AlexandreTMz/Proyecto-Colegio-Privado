@@ -1,7 +1,7 @@
 <?php
 class Persona
 {
-	//NECESITO IMPROTAR LAS OTRAS CLASES 
+	private $id_persona;
 	private $nombres;
 	private $apellidosP;
 	private $apellidosM;

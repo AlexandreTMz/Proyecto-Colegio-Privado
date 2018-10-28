@@ -1,11 +1,10 @@
 <?php
-class Competencias
+class Arcalificacion_notas
 {
-	private $id;
-	private $nombreCompetencia;
-	private $numeroCo;
-
-
+	private $id_arcnotas;
+	private $id_arcalificacion;
+	private $id_nota;
+	
 	public function __GET($x)
 	{ 
 		return $this->$x; 

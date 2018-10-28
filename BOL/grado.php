@@ -1,10 +1,8 @@
 <?php
-class Competencias
+class grado
 {
-	private $id;
-	private $nombreCompetencia;
-	private $numeroCo;
-
+	private $id_grado;
+	private $grado;
 
 	public function __GET($x)
 	{ 

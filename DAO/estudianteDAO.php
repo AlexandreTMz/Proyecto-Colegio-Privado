@@ -17,7 +17,7 @@ class EstudianteDAO
 		try
 		{
 		$statement = $this->pdo->prepare("CALL up_insertar_Estudiante(?,?)");
-        $statement->bindParam(1,$estudiante->__GET('id_persona'));
+        $statement->bindParam(1,$estudiante->__GET('id_persona')->__GET('id_persona'));
 		$statement->bindParam(2,$estudiante->__GET('codigo_estudiante'));
         $statement->execute();
 
@@ -42,7 +42,7 @@ class EstudianteDAO
 			{
 				$est = new Estudiante();
 
-				$est->__SET('id_persona', $r->id_persona);
+				$est->__GET('id_persona')->__SET('id_persona', $r->id_persona);
 				$est->__SET('codigo_estudiante', $r->codigo_estudiante);
 
 				$result[] = $est;

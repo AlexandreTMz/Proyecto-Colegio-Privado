@@ -1,11 +1,10 @@
 <?php
-class Competencias
+class Cursos_competencias
 {
-	private $id;
-	private $nombreCompetencia;
-	private $numeroCo;
-
-
+	private $id_competencia;
+	private $nombre_competencia;
+	private $numero_co;
+	
 	public function __GET($x)
 	{ 
 		return $this->$x; 

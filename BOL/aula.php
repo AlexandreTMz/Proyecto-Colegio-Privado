@@ -10,6 +10,14 @@ class Aula
 	private $idGrado;
 	private $idSeccion;
 
+	public function __CONSTRUCT(){
+				$this->idDocente = new Docente();
+				$this->idGrado = new Grado();
+				$this->idSeccion = new Secciones();
+		//echo $this->ent -> __GET('id_competencia');
+		}
+
+
 	public function __GET($x)
 	{
 		return $this->$x;

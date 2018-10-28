@@ -1,19 +1,20 @@
 <?php
-require_once('../BOL/competencias.php');
-require_once('../DAO/competenciaDAO.php');
+require_once('../BOL/alumnos_rcalificacion.php');
+require_once('../DAO/alumnos_rcalificacionDAO.php');
 
-$per = new Competencias();
-$perDAO = new CompetenciaDAO();
+$per = new Alumnos_rcalificacion();
+$perDAO = new alumnos_rcalificacionDAO();
 
 if(isset($_POST['guardar']))
 {
-	$per->__SET('id',				$_POST['id']);
-	$per->__SET('nombreCompetencia',$_POST['nombreCompetencia']);
-	$per->__SET('numeroCo',         $_POST['numeroCo']);
+	$per->__SET('id_arcalificacion',	$_POST['id_arcalificacion']);
+	$per->__SET('id_estudiante',				$_POST['id_estudiante']);
+	$per->__SET('id_rcalificacion',$_POST['id_rcalificacion']);
+	$per->__SET('nota_final',         $_POST['nota_final']);
 
 
 	$perDAO->Registrar($per);
-	header('Location: frmCompetencias.php');
+	header('Location: frmalumnos_rcalificacion.php');
 }
 
 
@@ -39,7 +40,7 @@ if(isset($_POST['guardar']))
 	  </div>
       <div class="col s9">
 		<div class="col s12">
-			<h1 class="text-center">Formulario de ingreso de competencias</h1>
+			<h1 class="text-center">Formulario de ingreso de alumos y calificacion</h1>
 		</div>
         <div class="pure-g">
             <div class="pure-u-1-12">
@@ -128,10 +129,71 @@ if(isset($_POST['guardar']))
 
 	
 
-				
+				<!--ESTA CONDICION SIRVE PARA REALIZAR BUSQUEDA POR DNI-->
+
+				<?php
+				if(isset($_POST['buscar']))
+				{
+					$resultado = array();//VARIABLE TIPO RESULTADO
+					$per->__SET('dni',          $_POST['dni']);//ESTABLECEMOS EL VALOR DEL DNI
+					$resultado = $perDAO->Listar($per); //CARGAMOS LOS REGISTRO EN EL ARRAY RESULTADO
+					if(!empty($resultado)) //PREGUNTAMOS SI NO ESTA VACIO EL ARRAY
+					{
+						?>
+						<table class="pure-table pure-table-horizontal">
+								<thead>
+										<tr>
+												<th style="text-align:left;">ID</th>
+												<th style="text-align:left;">Nombres</th>
+												<th style="text-align:left;">Apellidos</th>
+												<th style="text-align:left;">DNI</th>
+										</tr>
+								</thead>
+						<?php
+						foreach( $resultado as $r): //RECORREMOS EL ARRAY RESULTADO A TRAVES DE SUS CAMPOS
+							?>
+								<tr>
+										<td><?php echo $r->__GET('id'); ?></td>
+										<td><?php echo $r->__GET('nombres'); ?></td>
+										<td><?php echo $r->__GET('apellidos'); ?></td>
+										<td><?php echo $r->__GET('dni'); ?></td>
+								</tr>
+						<?php endforeach;
+					}
+					else
+					{
+						echo 'no se encuentra en la base de datos!';
+					}
+					?>
+					</table>
+					<?php
+				}
+				?>
 	
 <!--JavaScript at end of body for optimized loading-->
 <script type="text/javascript" src="js/materialize.min.js"></script>
+<script>
+	   
 
+		document.addEventListener('DOMContentLoaded', function() {
+			//inciio del parallax
+			var elems = document.querySelectorAll('.parallax');
+    		var instances = M.Parallax.init(elems);
+			
+			//inicio del combo box
+			var elems = document.querySelectorAll('select');
+    		var instances = M.FormSelect.init(elems);
+
+			
+ 		});
+
+		// Or with jQuery
+
+		$(document).ready(function(){
+			$('.datepicker').datepicker();
+		});
+      
+
+</script>
 </body>
 </html>

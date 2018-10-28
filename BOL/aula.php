@@ -1,4 +1,8 @@
 <?php
+require_once 'docente.php';
+require_once 'grado.php';
+require_once 'seccion.php';
+
 class Aula
 {
 	private $id_aula;

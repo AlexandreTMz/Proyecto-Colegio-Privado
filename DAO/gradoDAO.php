@@ -1,8 +1,8 @@
 <?php
-require_once("../DALO/DBAcces.php");
+require_once('../DAL/DBAccess.php');
 require_once('../BOL/grado.php');
 
-class gradoDAO
+class GradoDAO
 {
 	private $pdo;
 

@@ -1,5 +1,5 @@
 <?php
-require_once("../DALO/DBAcces.php");
+require_once("../DAL/DBAccess.php");
 require_once('../BOL/seccion.php');
 
 class seccionDAO

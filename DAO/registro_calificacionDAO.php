@@ -19,10 +19,10 @@ class Registro_calificacionDAO
 		$statement = $this->pdo->prepare("CALL up_insertar_Registro_calificacion(?,?,?,?,?,?)");
 		$statement->bindParam(1,$registro_calificacion->__GET('fecha'));
 		$statement->bindParam(2,$registro_calificacion->__GET('hora'));
-		$statement->bindParam(3,$registro_calificacion->__GET('id_periodo'));
-		$statement->bindParam(4,$registro_calificacion->__GET('id_grado'));
-		$statement->bindParam(5,$registro_calificacion->__GET('id_seccion'));
-		$statement->bindParam(6,$registro_calificacion->__GET('id_docente'));
+		$statement->bindParam(3,$registro_calificacion->__GET('id_periodo')->__GET('idperiodo'));
+		$statement->bindParam(4,$registro_calificacion->__GET('id_grado')->__GET('idgrado'));
+		$statement->bindParam(5,$registro_calificacion->__GET('id_seccion')->__GET('idseccion'));
+		$statement->bindParam(6,$registro_calificacion->__GET('id_docente')->__GET('iddocente'));
 
         $statement->execute();
 

@@ -1,8 +1,9 @@
 <?php
-class niveles_instrucciones
+class Competencia
 {
-	private $id_ninstruccion;
-	private $niveles_instruccion;
+	private $id_competencia;
+	private $nombre_competencia;
+	private $numero_co;
 
 	public function __GET($x)
 	{
@@ -12,6 +13,5 @@ class niveles_instrucciones
 	{
 		return $this->$x = $y;
 	}
-
 }
 ?>

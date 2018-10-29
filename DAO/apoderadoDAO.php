@@ -16,12 +16,13 @@ class ApoderadoDAO
 	{
 		try
 		{
-		$statement = $this->pdo->prepare("CALL up_insertar_apoderados(?,?,?,?,?)");
-    $statement->bindParam(1,$apoderado->__GET('id_persona'));
+		$statement = $this->pdo->prepare("CALL up_insertar_apoderados(?,?,?,?,?,?)");
+    $statement->bindParam(1,$apoderado->__GET('id_persona')->__GET('id_persona'));
+		$statement->bindParam(1,$apoderado->__GET('id_ninstruccion')->__GET('id_ninstruccion'));
+    $statement->bindParam(2,$apoderado->__GET('id_apoderados'));
 		$statement->bindParam(2,$apoderado->__GET('centro_trabajo'));
 		$statement->bindParam(3,$apoderado->__GET('ocupacion'));
 		$statement->bindParam(4,$apoderado->__GET('correo'));
-    $statement->bindParam(5,$apoderado->__GET('id_ninstruccion'));
     $statement -> execute();
 
 		} catch (Exception $e)
@@ -41,7 +42,9 @@ class ApoderadoDAO
 			foreach($statement->fetchAll(PDO::FETCH_OBJ) as $r)
 			{
 				$apo = new Apoderados();
-		    $apo->__SET('idPersona', $r->id_persona);
+		    $apo->__GET('id_persona')->__SET('id_persona', $r->id_persona);
+        $apo->__GET('id_ninstruccion')->__SET('id_ninstruccion', $r->id_ninstruccion);
+       	$apo->__SET('id_apoderados', $r->id_apoderados);
 				$apo->__SET('centro_trabajo', $r->centro_trabajo);
 				$apo->__SET('ocupacion', $r->ocupacion);
 				$apo->__SET('correo', $r->correo);

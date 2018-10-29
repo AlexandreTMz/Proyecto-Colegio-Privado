@@ -10,11 +10,12 @@ class Apoderados
 	private $id_ninstruccion;
 
 
- //Constructor
- public function __construct(){
-	 $this->id_ninstruccion = new niveles_instrucciones();
-	 $this->id_persona = new Persona();
- }
+	public function __construct(){
+		$this->id_persona = new Persona();
+		$this->id_ninstruccion = new niveles_instrucciones();
+	}
+
+>>>>>>> 802743be71d0bd29c5c6c8b441a0d050677691f1
 	public function __GET($x)
 	{
 		return $this->$x;

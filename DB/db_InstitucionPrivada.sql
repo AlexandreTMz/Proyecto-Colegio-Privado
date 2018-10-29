@@ -242,23 +242,15 @@ END
 $$
 
 DELIMITER $$
-<<<<<<< HEAD
-=======
-
->>>>>>> d0b75668260ecf6993d7487d577aaa664ee2a059
 CREATE PROCEDURE up_listar_aulas(
 )
 BEGIN
 	SELECT * FROM aulas a INNER JOIN docentes d ON a.id_docente = d.id_persona INNER JOIN grados g ON a.id_grado = g.id_grado INNER JOIN secciones s ON a.id_seccion = s.id_seccion INNER JOIN personas p ON d.id_persona = p.id_persona;
 END
 $$
-<<<<<<< HEAD
-=======
-
 
 
 /*REGISTRO DE CALIFICACION*/
-
 # REGISTRAR periodo
 DELIMITER $$
 CREATE PROCEDURE up_registrar_periodos
@@ -266,7 +258,7 @@ CREATE PROCEDURE up_registrar_periodos
     IN _descripcion VARCHAR(20)
 )
 BEGIN
-INSERT INTO periodos(descripcion) VALUES (_descripcion);
+  INSERT INTO periodos(descripcion) VALUES (_descripcion);
 END
 $$
 
@@ -441,4 +433,3 @@ DELIMITER ;
 
 
 /*FIN REGISTRO DE CALIFICACION*/
->>>>>>> d0b75668260ecf6993d7487d577aaa664ee2a059

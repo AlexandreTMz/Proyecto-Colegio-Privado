@@ -16,14 +16,14 @@ class AulaDAO
 	{
 		try
 		{
-		$statement = $this->pdo->prepare("CALL up_insertar_aulas(?,?,?,?,?,?,?)");
+		$statement = $this->pdo->prepare("CALL up_registrar_aula(?,?,?,?,?,?,?)");
 		$statement->bindParam(1, $aula->__GET('descripcion'));
 		$statement->bindParam(2, $aula->__GET('numero_aula'));
 		$statement->bindParam(3, $aula->__GET('numero_alumno'));
 		$statement->bindParam(4, $aula->__GET('turno'));
-		$statement->bindParam(5, $aula->__GET('id_docente')->__GET('id_docente'));
-	  $statement->bindParam(6, $aula->__GET('id_grado')->__GET('id_grado'));
-		$statement->bindParam(7, $aula->__GET('id_seccion')->__GET('id_seccion'));
+		$statement->bindParam(5, $aula->__GET('id_docente'));
+	  $statement->bindParam(6, $aula->__GET('id_grado'));
+		$statement->bindParam(7, $aula->__GET('id_seccion'));
     $statement -> execute();
 		} catch (Exception $e)
 		{
@@ -49,9 +49,11 @@ class AulaDAO
 				$aul->__SET('numero_aula', $r->numero_aula);
 				$aul->__SET('numero_alumno', $r->numero_alumno);
         $aul->__SET('turno', $r->turno);
-				$aul->__GET('id_docente')->__SET('id_persona', $r->id_persona);
-				$aul->__GET('id_grado')->__SET('id_grado', $r->id_grado);
-				$aul->__GET('id_seccion')->__SET('id_seccion', $r->id_seccion);
+				$aul->__GET('id_docente')->__GET('id_persona')->__SET('nombres', $r->nombre);
+				$aul->__GET('id_docente')->__GET('id_persona')->__SET('apellidosP', $r->apellido_paterno);
+				$aul->__GET('id_docente')->__GET('id_persona')->__SET('apellidosM', $r->apellido_materno);
+				$aul->__GET('id_grado')->__SET('grado', $r->grado);
+				$aul->__GET('id_seccion')->__SET('seccion',$r->seccion);
 
 				$result[] = $aul;
 			}

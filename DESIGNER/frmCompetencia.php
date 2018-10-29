@@ -1,14 +1,25 @@
 <?php
-require_once('../BOL/competencia.php');
+require_once('../BOL/competencias.php');
 require_once('../DAO/competenciaDAO.php');
 
-$com = new Competencia();
+require_once('../BOL/curso_competencia.php');
+require_once('../DAO/cursos_competenciasDAO.php');
+
+session_start();
+
+$com = new Competencias();
 $comDAO = new CompetenciaDAO();
+
+$cc = new Curso_Competencia();
+$ccDAO = new Curso_CompetenciaDAO();
+
+
 
 if(isset($_POST['guardar']))
 {
-	$com->__SET('nombre_competencia',          $_POST['nombre_competencia']);
-	$com->__SET('numero_co',        $_POST['numero_co']);
+	$com->__SET('nombreCompetencia',          $_POST['nombre_competencia']);
+	$com->__SET('numeroCo',        $_POST['numero_co']);
+	$com->__SET('id',        $_SESSION['id_curso']);
 
 	$comDAO->Registrar($com);
 	header('Location: frmCompetencia.php');
@@ -58,7 +69,8 @@ if(isset($_POST['guardar']))
 
 
 				$resultado = array();//VARIABLE TIPO RESULTADO
-					$resultado = $comDAO->ListarTodo(); //CARGAMOS LOS REGISTRO EN EL ARRAY RESULTADO
+					$cc->__SET('id_curso',          $_SESSION['id_curso']);
+					$resultado = $ccDAO->Listar($cc); //CARGAMOS LOS REGISTRO EN EL ARRAY RESULTADO
 					if(!empty($resultado)) //PREGUNTAMOS SI NO ESTA VACIO EL ARRAY
 					{
 						?>
@@ -75,10 +87,10 @@ if(isset($_POST['guardar']))
 						foreach( $resultado as $r): //RECORREMOS EL ARRAY RESULTADO A TRAVES DE SUS CAMPOS
 							?>
 								<tr>
+									<td><?php echo $r->__GET('id_ccompetencia'); ?></td>
 										<td><?php echo $r->__GET('id_competencia'); ?></td>
-										<td><?php echo $r->__GET('nombre_competencia'); ?></td>
-										<td><?php echo $r->__GET('numero_co'); ?></td>
-										<td><a href="auxiliar.php?id=<?php echo $r->__GET('id_competencia'); ?>">Capacidad</a></td>
+										<td><?php echo $r->__GET('id_curso'); ?></td>
+										<!--<td><a href="auxiliar.php?id=<?php echo $r->__GET('id_competencia'); ?>">Capacidad</a></td>-->
 								</tr>
 						<?php endforeach;
 					}
@@ -89,43 +101,6 @@ if(isset($_POST['guardar']))
 					?>
 					</table>
 
-					<?php
-
-				if(isset($_POST['buscar']))
-				{
-					$resultado = array();//VARIABLE TIPO RESULTADO
-					$com->__SET('id_competencia',          $_POST['nombre_competencia']);//ESTABLECEMOS EL VALOR DEL DNI
-					$resultado = $comDAO->Listar($com); //CARGAMOS LOS REGISTRO EN EL ARRAY RESULTADO
-					if(!empty($resultado)) //PREGUNTAMOS SI NO ESTA VACIO EL ARRAY
-					{
-						?>
-						<table class="pure-table pure-table-horizontal">
-								<thead>
-										<tr>
-												<th style="text-align:left;">ID</th>
-												<th style="text-align:left;">Nombre</th>
-												<th style="text-align:left;">Numero</th>
-										</tr>
-								</thead>
-						<?php
-						foreach( $resultado as $r): //RECORREMOS EL ARRAY RESULTADO A TRAVES DE SUS CAMPOS
-							?>
-								<tr>
-										<td><?php echo $r->__GET('id_competencia'); ?></td>
-										<td><?php echo $r->__GET('nombre_competencia'); ?></td>
-										<td><?php echo $r->__GET('numero_co'); ?></td>
-								</tr>
-						<?php endforeach;
-					}
-					else
-					{
-						echo 'no se encuentra en la base de datos!';
-					}
-					?>
-					</table>
-					<?php
-				}
-				?>
 
     </body>
 </html>

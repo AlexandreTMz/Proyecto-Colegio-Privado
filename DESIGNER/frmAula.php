@@ -2,11 +2,20 @@
 require_once('../BOL/aula.php');
 require_once('../DAO/aulaDAO.php');
 
+require_once('../BOL/docentes.php');
+require_once('../DAO/docenteaulaDAO.php');
+
 require_once('../BOL/grado.php');
 require_once('../DAO/gradoDAO.php');
 
 require_once('../BOL/seccion.php');
 require_once('../DAO/seccionDAO.php');
+
+$doc = new Docente();
+$docenteDAO = new DocenteAulaDAO();
+
+$resultado_docente = array();
+$resultado_docente = $docenteDAO->Listar();
 
 $gra = new Grado();
 $gradoDAO = new GradoDAO();
@@ -20,23 +29,22 @@ $seccionDAO = new SeccionDAO();
 $resultado_seccion = array();
 $resultado_seccion = $seccionDAO->Listar();
 
-//if(!empty($resultado))
-//{
+$aul = new Aula();
+$aulaDAO = new AulaDAO();
 
-/*if(isset($_POST['guardar']))
+if(isset($_POST['guardar']))
 {
-	$aul->__SET('idAula',          $_POST['idAula']);
-	$aul->__SET('descripcion',        $_POST['descripcion']);
-	$aul->__SET('numeroAula', $_POST['numeroAula']);
-	$aul->__SET('numeroAlumno',          $_POST['numeroAlumno']);
-	$aul->__SET('turno',          $_POST['turno']);
-	$aul->__SET('idDocente',          $_POST['idDocente']);
-	$aul->__SET('idGrado',          $_POST['idGrado']);
-	$aul->__SET('idSeccion',          $_POST['idSeccion']);
+	$aul->__SET('descripcion', $_POST['descripcion']);
+	$aul->__SET('numero_aula', $_POST['numero_aula']);
+	$aul->__SET('numero_alumno', $_POST['numero_alumno']);
+	$aul->__SET('turno', $_POST['turno']);
+	$aul->__SET('id_docente', $_POST['id_docente']);
+	$aul->__SET('id_grado', $_POST['id_grado']);
+	$aul->__SET('id_seccion', $_POST['id_seccion']);
 
-	$aulDAO->Registrar($aul);
+	$aulaDAO->Registrar($aul);
 	header('Location: frmAula.php');
-}*/
+}
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +73,7 @@ $resultado_seccion = $seccionDAO->Listar();
 					</tr>
 					<tr>
 						<th style="text-align:left;">Turno:</th>
-						<td><select name="id_turno" style="width:100%;">
+						<td><select name="turno" style="width:100%;">
 							<option value="m">M</option>
 							<option value="t">T</option>
 						</select></td>
@@ -73,8 +81,22 @@ $resultado_seccion = $seccionDAO->Listar();
 					<tr>
 						<th style="text-align:left;">Docente:</th>
 						<td><select name="id_docente" style="width:100%;">
-							<option value="m">M</option>
-							<option value="t">T</option>
+							<?php
+							if(!empty($resultado_docente))
+							{
+								foreach( $resultado_docente as $r_d):
+							?>
+									<option value="<?php echo $r_d->__GET('id_persona')->__GET('id_persona');?>"><?php echo $r_d->__GET('id_persona')->__GET('apellidosP')." ".
+									$r_d->__GET('id_persona')->__GET('apellidosM').", ".$r_d->__GET('id_persona')->__GET('nombres');?></option>
+							<?php
+								endforeach;
+							}else
+							{
+							?>
+								<option value="0">No hay opciones</option>
+							<?php
+							}
+							?>
 						</select></td>
 					</tr>
 					<tr>
@@ -129,11 +151,14 @@ $resultado_seccion = $seccionDAO->Listar();
 	</div>
 
 	<?php
-	/*$resultado_aula = array();
-		$aul->__SET('idAula',          $_POST['idAula']);//ESTABLECEMOS EL VALOR DEL DNI
-		$resultado = $aulDAO->Listar($aul); //CARGAMOS LOS REGISTRO EN EL ARRAY RESULTADO
-		if(!empty($resultado)) //PREGUNTAMOS SI NO ESTA VACIO EL ARRAY
-		{*/
+	$aul = new Aula();
+	$aulaDAO = new AulaDAO();
+
+	$resultado_aula = array();
+	$resultado_aula = $aulaDAO->Listar();
+
+	if(!empty($resultado_aula)) //PREGUNTAMOS SI NO ESTA VACIO EL ARRAY
+	{
 			?>
 			<table class="pure-table pure-table-horizontal">
 					<thead>
@@ -143,35 +168,35 @@ $resultado_seccion = $seccionDAO->Listar();
 									<th style="text-align:left;">Número de Aula</th>
 									<th style="text-align:left;">Número de Alumno</th>
 									<th style="text-align:left;">Turno</th>
-									<th style="text-align:left;">Id Docente</th>
-									<th style="text-align:left;">Id Grado</th>
-									<th style="text-align:left;">Id Seccion</th>
+									<th style="text-align:left;">Docente</th>
+									<th style="text-align:left;">Grado</th>
+									<th style="text-align:left;">Seccion</th>
 							</tr>
 					</thead>
 			<?php
-			//foreach( $resultado as $r): //RECORREMOS EL ARRAY RESULTADO A TRAVES DE SUS CAMPOS
+			foreach( $resultado_aula as $r): //RECORREMOS EL ARRAY RESULTADO A TRAVES DE SUS CAMPOS
 				?>
 					<tr>
-							<!--<td><?php echo $r->__GET('idAula'); ?></td>
+							<td><?php echo $r->__GET('id_aula'); ?></td>
 							<td><?php echo $r->__GET('descripcion'); ?></td>
-							<td><?php echo $r->__GET('numeroAula'); ?></td>
-							<td><?php echo $r->__GET('numeroAlumno'); ?></td>
+							<td><?php echo $r->__GET('numero_aula'); ?></td>
+							<td><?php echo $r->__GET('numero_alumno'); ?></td>
 							<td><?php echo $r->__GET('turno'); ?></td>
-							<td><?php echo $r->__GET('idDocente'); ?></td>
-							<td><?php echo $r->__GET('idGrado'); ?></td>
-							<td><?php echo $r->__GET('idSeccion'); ?></td>-->
+							<td><?php echo $r->__GET('id_docente')->__GET('id_persona')->__GET('apellidosP')
+							. " " . $r->__GET('id_docente')->__GET('id_persona')->__GET('apellidosM')
+							. ", ". $r->__GET('id_docente')->__GET('id_persona')->__GET('nombres'); ?></td>
+							<td><?php echo $r->__GET('id_grado')->__GET('grado'); ?></td>
+							<td><?php echo $r->__GET('id_seccion')->__GET('seccion'); ?></td>
 					</tr>
-			<?php /*endforeach;
+			<?php endforeach;
 		}
 		else
 		{
 			echo 'no se encuentra en la base de datos!';
-		}*/
+		}
 		?>
 		</table>
-		<?php
-	//}
-	?>
+
 
 				<!--ESTA CONDICION SIRVE PARA REALIZAR BUSQUEDA POR DNI-->
 
@@ -184,7 +209,7 @@ $resultado_seccion = $seccionDAO->Listar();
 					if(!empty($resultado)) //PREGUNTAMOS SI NO ESTA VACIO EL ARRAY
 					{*/
 						?>
-						<table class="pure-table pure-table-horizontal">
+						<!--<table class="pure-table pure-table-horizontal">
 								<thead>
 										<tr>
 												<th style="text-align:left;">Id Aula</th>
@@ -196,7 +221,7 @@ $resultado_seccion = $seccionDAO->Listar();
 												<th style="text-align:left;">Id Grado</th>
 												<th style="text-align:left;">Id Seccion</th>
 										</tr>
-								</thead>
+								</thead>-->
 						<?php
 						//foreach( $resultado as $r): //RECORREMOS EL ARRAY RESULTADO A TRAVES DE SUS CAMPOS
 							?>

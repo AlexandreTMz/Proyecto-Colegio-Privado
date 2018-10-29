@@ -36,7 +36,10 @@ class PeriodosDAO
      $result = array();
 
      $statement = $this->pdo->prepare("CALL up_buscar_periodos(?)");
-     $statement->bindParam(1,$periodos->__GET('dni'));
+     //ASIGNAR A UNA VARIABLE TEMPORAL
+     $tempIdPeriodo = $periodos->__GET("id_periodo");
+     //EJECUTAR Y ENVIANDO LOS PARAMETROS TEMPORALES
+     $statement->bindParam(1,$tempIdPeriodo);
      $statement->execute();
 
      foreach($statement->fetchAll(PDO::FETCH_OBJ) as $r)

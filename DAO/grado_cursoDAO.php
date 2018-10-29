@@ -1,5 +1,5 @@
 <?php
-require_once('../DAL/DBconexion.php');
+require_once('../DAL/DBAccess.php');
 require_once('../BOL/grados_curso.php');
 
 class grados_cursoDAO
@@ -8,7 +8,7 @@ class grados_cursoDAO
 
 	public function __CONSTRUCT()
 	{
-			$dba = new DBconexion();
+			$dba = new DBAccess();
 			$this->pdo = $dba->get_connection();
 	}
 
@@ -16,13 +16,38 @@ class grados_cursoDAO
 	{
 		try
 		{
-		$statement = $this->pdo->prepare("CALL addgrados_cursos(?,?,?)");
-    $statement->bindParam(1,$apoderado->__GET('id_gcurso'));
-		$statement->bindParam(2,$apoderado->__GET('id_grado'));
-		$statement->bindParam(3,$apoderado->__GET('id_curso'));
+		$statement = $this->pdo->prepare("Call_addgrados_cursos(?,?)");
+		$statement->bindParam(1,$apoderado->__GET('id_grado'));
+		$statement->bindParam(2,$apoderado->__GET('id_curso'));
     $statement -> execute();
 
 		} catch (Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+	public function Listar()
+	{
+		try
+		{
+			$result = array();
+
+			$statement = $this->pdo->prepare("call up_buscargrados_cursos()");
+			$statement->execute();
+
+			foreach($statement->fetchAll(PDO::FETCH_OBJ) as $r)
+			{
+				$est = new grados_cursos();
+
+				$est->__SET('id_gcurso', $r->id_gcurso);
+				$est->__GET('id_grado')->__SET('id_grado', $r->id_grado);
+				$est->__GET('id_curso')->__SET('id_curso', $r->id_curso);
+				$result[] = $est;
+			}
+
+			return $result;
+		}
+		catch(Exception $e)
 		{
 			die($e->getMessage());
 		}

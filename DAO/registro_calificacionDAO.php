@@ -16,7 +16,7 @@ class Registro_calificacionDAO
 	{
 		try
 		{
-		$statement = $this->pdo->prepare("CALL up_insertar_Registro_calificacion(?,?,?,?,?,?)");
+		$statement = $this->pdo->prepare("CALL up_registrar_registro_calificacion(?,?,?,?,?,?)");
 		$statement->bindParam(1,$registro_calificacion->__GET('fecha'));
 		$statement->bindParam(2,$registro_calificacion->__GET('hora'));
 		$statement->bindParam(3,$registro_calificacion->__GET('id_periodo')->__GET('id_periodo'));
@@ -39,7 +39,9 @@ class Registro_calificacionDAO
 			$result = array();
 
 			$statement = $this->pdo->prepare("call up_buscar_registro_calificacion(?)");
-			$statement->bindParam(1,$registro_calificacion->__GET('id_grado'));
+			$tempIdRcalificacion = $registro_calificacion->__GET('id_rcalificacion');
+			$statement->bindParam(1,$tempIdRcalificacion);
+
 			$statement->execute();
 
 			foreach($statement->fetchAll(PDO::FETCH_OBJ) as $r)

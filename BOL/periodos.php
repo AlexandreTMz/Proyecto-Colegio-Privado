@@ -11,7 +11,7 @@ class Periodos
     return $this->$x;
   }
 
-  public function _SET($x, $y)
+  public function __SET($x, $y)
   {
     return $this->$x = $y;
   }

@@ -2,13 +2,20 @@
 require_once('../BOL/aula.php');
 require_once('../DAO/aulaDAO.php');
 
+require_once('../BOL/docentes.php');
+require_once('../DAO/docenteaulaDAO.php');
+
 require_once('../BOL/grado.php');
 require_once('../DAO/gradoDAO.php');
 
 require_once('../BOL/seccion.php');
 require_once('../DAO/seccionDAO.php');
 
+$doc = new Docente();
+$docenteDAO = new DocenteAulaDAO();
 
+$resultado_docente = array();
+$resultado_docente = $docenteDAO->Listar();
 
 $gra = new Grado();
 $gradoDAO = new GradoDAO();
@@ -22,25 +29,22 @@ $seccionDAO = new SeccionDAO();
 $resultado_seccion = array();
 $resultado_seccion = $seccionDAO->Listar();
 
+$aul = new Aula();
+$aulaDAO = new AulaDAO();
 
-
-//if(!empty($resultado))
-//{
-
-/*if(isset($_POST['guardar']))
+if(isset($_POST['guardar']))
 {
-	$aul->__SET('idAula',          $_POST['idAula']);
-	$aul->__SET('descripcion',        $_POST['descripcion']);
-	$aul->__SET('numeroAula', $_POST['numeroAula']);
-	$aul->__SET('numeroAlumno',          $_POST['numeroAlumno']);
-	$aul->__SET('turno',          $_POST['turno']);
-	$aul->__SET('idDocente',          $_POST['idDocente']);
-	$aul->__SET('idGrado',          $_POST['idGrado']);
-	$aul->__SET('idSeccion',          $_POST['idSeccion']);
+	$aul->__SET('descripcion', $_POST['descripcion']);
+	$aul->__SET('numero_aula', $_POST['numero_aula']);
+	$aul->__SET('numero_alumno', $_POST['numero_alumno']);
+	$aul->__SET('turno', $_POST['turno']);
+	$aul->__SET('id_docente', $_POST['id_docente']);
+	$aul->__SET('id_grado', $_POST['id_grado']);
+	$aul->__SET('id_seccion', $_POST['id_seccion']);
 
-	$aulDAO->Registrar($aul);
+	$aulaDAO->Registrar($aul);
 	header('Location: frmAula.php');
-}*/
+}
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +73,7 @@ $resultado_seccion = $seccionDAO->Listar();
 					</tr>
 					<tr>
 						<th style="text-align:left;">Turno:</th>
-						<td><select name="id_turno" style="width:100%;">
+						<td><select name="turno" style="width:100%;">
 							<option value="m">M</option>
 							<option value="t">T</option>
 						</select></td>
@@ -77,8 +81,22 @@ $resultado_seccion = $seccionDAO->Listar();
 					<tr>
 						<th style="text-align:left;">Docente:</th>
 						<td><select name="id_docente" style="width:100%;">
-							<option value="m">M</option>
-							<option value="t">T</option>
+							<?php
+							if(!empty($resultado_docente))
+							{
+								foreach( $resultado_docente as $r_d):
+							?>
+									<option value="<?php echo $r_d->__GET('id_persona')->__GET('id_persona');?>"><?php echo $r_d->__GET('id_persona')->__GET('apellidosP')." ".
+									$r_d->__GET('id_persona')->__GET('apellidosM').", ".$r_d->__GET('id_persona')->__GET('nombres');?></option>
+							<?php
+								endforeach;
+							}else
+							{
+							?>
+								<option value="0">No hay opciones</option>
+							<?php
+							}
+							?>
 						</select></td>
 					</tr>
 					<tr>

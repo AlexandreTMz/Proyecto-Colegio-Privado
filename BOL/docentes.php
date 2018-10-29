@@ -1,7 +1,7 @@
 <?php
 
-require_once 'persona.php';
-require_once 'funcion.php';
+require 'persona.php';
+require 'funcion.php';
 
 class Docente
 {
@@ -14,7 +14,7 @@ class Docente
 
 	/*CREANDO EL CONSTRUCTOR*/
 
-	public function __CONSTRUCT()
+	public function __construct()
 	{
 		$this->id_persona = new Persona();
 		$this->id_funcion = new funcion1();

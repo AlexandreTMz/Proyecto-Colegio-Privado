@@ -16,22 +16,26 @@ class seccionDAO
 	{
 		try
 		{
+
 		$statement = $this->pdo->prepare("CALL up_registrar_seccion(?)");
 		$statement->bindParam(1, $seccion->__GET('seccion'));
-    $statement -> execute();
+    	$statement -> execute();
+
 		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
 	}
 
-	public function Listar()
+	public function Listar(Seccion $seccion)
 	{
 		try
 		{
 			$result = array();
 
-			$statement = $this->pdo->prepare("CALL up_listar_seccion()");
+			$statement = $this->pdo->prepare("CALL up_buscar_seccion(?)");
+			$tempId_seccion = $seccion->__GET('id_seccion');
+			$statement->bindParam(1, $tempId_seccion);
 			$statement->execute();
 
 			foreach($statement->fetchAll(PDO::FETCH_OBJ) as $r)

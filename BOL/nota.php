@@ -1,5 +1,5 @@
 <?php
-class Notas
+class notas
 {
 	private $id_nota;
 	private $nota;

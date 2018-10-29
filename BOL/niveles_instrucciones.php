@@ -2,7 +2,7 @@
 class niveles_instrucciones
 {
 	private $id_ninstruccion;
-	private $niveles_instrucciones;
+	private $niveles_instruccion;
 
 	public function __GET($x)
 	{
@@ -12,6 +12,6 @@ class niveles_instrucciones
 	{
 		return $this->$x = $y;
 	}
-	
+
 }
 ?>

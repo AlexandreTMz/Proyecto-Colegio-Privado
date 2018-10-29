@@ -1,9 +1,8 @@
 <?php
-class Competencias
+class Secciones
 {
-	private $id;
-	private $nombreCompetencia;
-	private $numeroCo;
+	private $id_seccion;
+	private $seccion;
 
 	public function __GET($x)
 	{

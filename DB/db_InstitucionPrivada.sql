@@ -262,7 +262,7 @@ CREATE PROCEDURE up_registrar_periodos
 )
 BEGIN
 INSERT INTO periodos(descripcion) VALUES (_descripcion);
-END 
+END
 $$
 
 # BUSCAR periodo
@@ -273,9 +273,9 @@ CREATE PROCEDURE up_buscar_Periodos
 )
 BEGIN
 
-select * from periodos where id_periodo LIKE CONCAT('%', _id_periodo , '%');  
+select * from periodos where id_periodo LIKE CONCAT('%', _id_periodo , '%');
 
-END 
+END
 $$
 
 
@@ -287,7 +287,7 @@ CREATE PROCEDURE up_registrar_grado
 )
 BEGIN
 INSERT INTO grados(grado) VALUES (_grado);
-END 
+END
 $$
 
 # BUSCAR grado
@@ -298,9 +298,9 @@ CREATE PROCEDURE up_buscar_grado
 )
 BEGIN
 
-select * from grados where id_grado LIKE CONCAT('%', _id_grado , '%');  
+select * from grados where id_grado LIKE CONCAT('%', _id_grado , '%');
 
-END 
+END
 $$
 
 
@@ -315,7 +315,7 @@ BEGIN
 
 INSERT INTO secciones(seccion) VALUES (_seccion);
 
-END 
+END
 $$
 
 # BUSCAR seccioon
@@ -326,9 +326,9 @@ CREATE PROCEDURE up_buscar_seccion
 )
 BEGIN
 
-select * from secciones where id_seccion LIKE CONCAT('%', _id_seccion , '%');  
+select * from secciones where id_seccion LIKE CONCAT('%', _id_seccion , '%');
 
-END 
+END
 $$
 
 
@@ -342,7 +342,7 @@ CREATE PROCEDURE up_registrar_docente
 )
 BEGIN
 INSERT INTO docentes(id_persona, estado, id_funcion) VALUES (_id_persona,_estado,_id_funcion);
-END 
+END
 $$
 
 # BUSCAR docente
@@ -353,9 +353,9 @@ CREATE PROCEDURE up_buscar_docente
 )
 BEGIN
 
-select * from docentes where id_persona LIKE CONCAT('%', _id_persona , '%');  
+select * from docentes where id_persona LIKE CONCAT('%', _id_persona , '%');
 
-END 
+END
 $$
 
 
@@ -376,7 +376,7 @@ BEGIN
 INSERT INTO registros_calificaciones(fecha, hora, id_periodo, id_grado, id_seccion, id_docente)
 VALUES (_fecha,_hora,_id_periodo,_id_grado,_id_seccion,_id_docente);
 
-END 
+END
 $$
 
 # BUSCAR docente
@@ -387,10 +387,52 @@ CREATE PROCEDURE up_buscar_registro_calificacion
 )
 BEGIN
 
-select * from registros_calificaciones where id_rcalificacion LIKE CONCAT('%', _id_rcalificacion , '%');  
+select * from registros_calificaciones where id_rcalificacion LIKE CONCAT('%', _id_rcalificacion , '%');
 
-END 
+END
 $$
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `up_buscar_director`(IN `_id_personad` INT)
+BEGIN
+SELECT * FROM directores where persona_id_persona=_id_personad;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `up_buscar_grado`(IN `_id_grado` INT)
+BEGIN
+SELECT * FROM grados where id_grado=_id_grado;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `up_insertar_directores`(
+persona_id_persona int(11),
+funcion int(11),
+estado char(1)
+)
+INSERT INTO directores (persona_id_persona, funcion, estado) VALUES(persona_id_persona, funcion, estado)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `up_buscar_nota`(IN `_id_nota` INT)
+BEGIN
+SELECT * FROM notas where id_nota=_id_nota;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `up_insertar_grado`(IN `grado` VARCHAR(100), IN `id_grado` INT(11))
+INSERT INTO grados (id_grado,grado) VALUES(id_grado,grado)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `up_insertar_nota`(
+id_nota int(11),
+nota VARCHAR(100)
+)
+INSERT INTO notas (id_nota, nota) VALUES(id_nota, nota)$$
+DELIMITER ;
 
 
 /*FIN REGISTRO DE CALIFICACION*/

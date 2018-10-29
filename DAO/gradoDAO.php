@@ -18,20 +18,25 @@ class GradoDAO
 		{
 		$statement = $this->pdo->prepare("CALL up_registrar_grado(?)");
 		$statement->bindParam(1, $grado->__GET('grado'));
-    $statement -> execute();
+    	$statement -> execute();
+
 		} catch (Exception $e)
 		{
 			die($e->getMessage());
 		}
 	}
 
-	public function Listar()
+	public function Listar(Grado $grado)
 	{
 		try
 		{
 			$result = array();
 
-			$statement = $this->pdo->prepare("CALL up_listar_grado()");
+			$statement = $this->pdo->prepare("CALL up_buscar_grado(?)");
+			//ASIGNAR A UNA VARIABLE TEMPORAL
+    		$tempIdPeriodo = $grado->__GET("id_grado");
+     		//EJECUTAR Y ENVIANDO LOS PARAMETROS TEMPORALES
+			$statement->bindParam(1, $tempIdPeriodo);
 			$statement->execute();
 
 			foreach($statement->fetchAll(PDO::FETCH_OBJ) as $r)

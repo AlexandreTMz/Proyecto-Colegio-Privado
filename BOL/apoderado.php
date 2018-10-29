@@ -6,7 +6,7 @@ class Apoderados
 	private $ocupacion;
 	private $correo;
 
-  private $id_persona;
+  	private $id_persona;
 	private $id_ninstruccion;
 
 
@@ -15,7 +15,7 @@ class Apoderados
 		$this->id_ninstruccion = new niveles_instrucciones();
 	}
 
->>>>>>> 802743be71d0bd29c5c6c8b441a0d050677691f1
+	//>>>>>>> 802743be71d0bd29c5c6c8b441a0d050677691f1
 	public function __GET($x)
 	{
 		return $this->$x;

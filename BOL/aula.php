@@ -14,7 +14,7 @@ class Aula
 	private $id_grado;
 	private $id_seccion;
 
-	public function __CONSTRUCT()
+	public function __construct()
 	{
 		$this->id_docente = new Docente();
 		$this->id_grado = new Grado();

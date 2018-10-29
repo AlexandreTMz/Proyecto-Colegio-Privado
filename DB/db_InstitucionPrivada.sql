@@ -240,3 +240,23 @@ BEGIN
 	SELECT * FROM secciones;
 END
 $$
+
+DELIMITER $$
+
+CREATE PROCEDURE up_listar_aulas(
+)
+BEGIN
+	SELECT * FROM aulas a INNER JOIN docentes d ON a.id_docente = d.id_persona INNER JOIN grados g ON a.id_grado = g.id_grado INNER JOIN secciones s ON a.id_seccion = s.id_seccion INNER JOIN personas p ON d.id_persona = p.id_persona;
+END
+$$
+
+
+INSERT INTO tipos_documentos VALUES (null, 'Dni'), (null, 'Carnet de Extranjeria');
+INSERT INTO estados_civiles VALUES (null, 'Soltero'), (null, 'Casado');
+INSERT INTO personas VALUES (null, 'Luis', 'Martinez', 'Napa', '1234567', '1996-07-28', 'M', 'América', '11111', '1', '1');
+INSERT INTO personas VALUES (null, 'Rosa', 'Loza', 'Salas', '649372', '1980-01-02', 'F', 'Panamericana', '22222', '2', '2');
+
+INSERT INTO funciones VALUES (null, 'Registrar');
+
+INSERT INTO docentes VALUES ('1', '1', '1');
+INSERT INTO docentes VALUES ('2', '1', '1');

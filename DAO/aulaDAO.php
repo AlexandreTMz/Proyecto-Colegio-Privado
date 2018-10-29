@@ -21,7 +21,7 @@ class AulaDAO
 		$statement->bindParam(2, $aula->__GET('numero_aula'));
 		$statement->bindParam(3, $aula->__GET('numero_alumno'));
 		$statement->bindParam(4, $aula->__GET('turno'));
-		$statement->bindParam(5, $aula->__GET('id_docente')->__GET('id_docente'));
+		$statement->bindParam(5, $aula->__GET('id_docente')->__GET('id_persona'));
 	  $statement->bindParam(6, $aula->__GET('id_grado')->__GET('id_grado'));
 		$statement->bindParam(7, $aula->__GET('id_seccion')->__GET('id_seccion'));
     $statement -> execute();

@@ -16,7 +16,7 @@ class CompetenciaDAO
 	{
 		try
 		{
-		$statement = $this->pdo->prepare("call up_insertar_competencia(?,?,?)");
+		$statement = $this->pdo->prepare("call up_registrar_competencia(?,?,?)");
 		$statement->bindParam(1,$competencias->__GET('id'));
 		$statement->bindParam(2,$competencias->__GET('nombreCompetencia'));
 		$statement->bindParam(3,$competencias->__GET('numeroCo'));
@@ -29,6 +29,34 @@ class CompetenciaDAO
 		}
 	}
 
-}
+	public function ListarCapacidad(Competencia $competencia)
+	{
+		try
+		{
+			$result = array();
 
+			$statement = $this->pdo->prepare("call up_listar_capacidad(?)");
+			$statement->bindParam(1,$capacidad->__GET('ent')->__GET('id_competencia'));
+			$statement->execute();
+
+			foreach($statement->fetchAll(PDO::FETCH_OBJ) as $r)
+			{
+				$cap = new Capacidad();
+
+				$cap->__SET('id_capacidad', $r->id_capacidad);
+				$cap->__SET('capacidad', $r->capacidad);
+				$cap->__GET('ent')->__SET('id_competencia', $r->id_competencia);
+
+				$result[] = $cap;
+			}
+
+			return $result;
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+
+}
+}
 ?>

@@ -1,6 +1,7 @@
 <?php
 require_once('../DAL/DBAccess.php');
 require_once('../BOL/apoderado.php');
+require_once('../BOL/niveles_instrucciones.php');
 
 class ApoderadoDAO
 {

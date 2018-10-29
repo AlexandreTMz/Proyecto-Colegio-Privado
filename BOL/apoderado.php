@@ -9,7 +9,7 @@ class Apoderados
 
 	public function __construct(){
 		$this->id_persona = new Persona();
-		$this->id_ninstruccion = new Ninstruccion();
+		$this->id_ninstruccion = new niveles_instrucciones();
 	}
 
 	public function __GET($x)

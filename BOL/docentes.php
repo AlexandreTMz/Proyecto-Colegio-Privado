@@ -17,7 +17,7 @@ class Docente
 	public function __CONSTRUCT()
 	{
 		$this->id_persona = new Persona();
-		$this->id_funcion = new Funcion();
+		$this->id_funcion = new funcion1();
 	}
 
 	/*EL GET (INGRESAR) Y EL SET (OBTENER)*/

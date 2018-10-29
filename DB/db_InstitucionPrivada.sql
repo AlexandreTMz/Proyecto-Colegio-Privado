@@ -249,3 +249,148 @@ BEGIN
 	SELECT * FROM aulas a INNER JOIN docentes d ON a.id_docente = d.id_persona INNER JOIN grados g ON a.id_grado = g.id_grado INNER JOIN secciones s ON a.id_seccion = s.id_seccion INNER JOIN personas p ON d.id_persona = p.id_persona;
 END
 $$
+
+
+
+/*REGISTRO DE CALIFICACION*/
+
+# REGISTRAR periodo
+DELIMITER $$
+CREATE PROCEDURE up_registrar_periodos
+(
+    IN _descripcion VARCHAR(20)
+)
+BEGIN
+INSERT INTO periodos(descripcion) VALUES (_descripcion);
+END 
+$$
+
+# BUSCAR periodo
+DELIMITER $$
+CREATE PROCEDURE up_buscar_Periodos
+(
+    IN _id_periodo VARCHAR(20)
+)
+BEGIN
+
+select * from periodos where id_periodo LIKE CONCAT('%', _id_periodo , '%');  
+
+END 
+$$
+
+
+# REGISTRAR grado
+DELIMITER $$
+CREATE PROCEDURE up_registrar_grado
+(
+    IN _grado VARCHAR(20)
+)
+BEGIN
+INSERT INTO grados(grado) VALUES (_grado);
+END 
+$$
+
+# BUSCAR grado
+DELIMITER $$
+CREATE PROCEDURE up_buscar_grado
+(
+    IN _id_grado VARCHAR(20)
+)
+BEGIN
+
+select * from grados where id_grado LIKE CONCAT('%', _id_grado , '%');  
+
+END 
+$$
+
+
+
+# REGISTRAR seccioon
+DELIMITER $$
+CREATE PROCEDURE up_registrar_seccion
+(
+    IN _seccion VARCHAR(20)
+)
+BEGIN
+
+INSERT INTO secciones(seccion) VALUES (_seccion);
+
+END 
+$$
+
+# BUSCAR seccioon
+DELIMITER $$
+CREATE PROCEDURE up_buscar_seccion
+(
+    IN _id_seccion VARCHAR(20)
+)
+BEGIN
+
+select * from secciones where id_seccion LIKE CONCAT('%', _id_seccion , '%');  
+
+END 
+$$
+
+
+# REGISTRAR docente
+DELIMITER $$
+CREATE PROCEDURE up_registrar_docente
+(
+    IN _id_persona VARCHAR(20),
+    IN _estado VARCHAR(20),
+    IN _id_funcion VARCHAR(20)
+)
+BEGIN
+INSERT INTO docentes(id_persona, estado, id_funcion) VALUES (_id_persona,_estado,_id_funcion);
+END 
+$$
+
+# BUSCAR docente
+DELIMITER $$
+CREATE PROCEDURE up_buscar_docente
+(
+    IN _id_persona VARCHAR(20)
+)
+BEGIN
+
+select * from docentes where id_persona LIKE CONCAT('%', _id_persona , '%');  
+
+END 
+$$
+
+
+
+# REGISTRAR docente
+DELIMITER $$
+CREATE PROCEDURE up_registrar_registro_calificacion
+(
+    IN _fecha VARCHAR(20),
+    IN _hora VARCHAR(20),
+    IN _id_periodo VARCHAR(20),
+    IN _id_grado VARCHAR(20),
+    IN _id_seccion VARCHAR(20),
+    IN _id_docente VARCHAR(20)
+)
+BEGIN
+
+INSERT INTO registros_calificaciones(fecha, hora, id_periodo, id_grado, id_seccion, id_docente)
+VALUES (_fecha,_hora,_id_periodo,_id_grado,_id_seccion,_id_docente);
+
+END 
+$$
+
+# BUSCAR docente
+DELIMITER $$
+CREATE PROCEDURE up_buscar_registro_calificacion
+(
+    IN _id_rcalificacion VARCHAR(20)
+)
+BEGIN
+
+select * from registros_calificaciones where id_rcalificacion LIKE CONCAT('%', _id_rcalificacion , '%');  
+
+END 
+$$
+
+
+/*FIN REGISTRO DE CALIFICACION*/

@@ -249,6 +249,20 @@ BEGIN
 END
 $$
 
+DELIMITER $$
+CREATE PROCEDURE up_registrar_aula(
+    IN _descripcion VARCHAR(100),
+    IN _numero_aula VARCHAR(50),
+    IN _numero_alumno VARCHAR(10),
+    IN _turno CHAR(1),
+    IN _id_docente INT(11),
+    IN _id_grado INT(11),
+    IN _id_seccion INT(11)
+)
+BEGIN
+	INSERT INTO aulas VALUES (null, _descripcion, _numero_aula, _numero_alumno, _turno, _id_docente, _id_grado, _id_seccion);
+END
+$$
 
 /*REGISTRO DE CALIFICACION*/
 # REGISTRAR periodo

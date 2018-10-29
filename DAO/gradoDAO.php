@@ -16,10 +16,17 @@ class GradoDAO
 	{
 		try
 		{
+<<<<<<< HEAD
+		$statement = $this->pdo->prepare("CALL up_insertar_grado(?,?)");
+		$statement->bindParam(1, $grado->__GET('id_grado'));
+		$statement->bindParam(2, $grado->__GET('grado'));
+    $statement -> execute();
+=======
 		$statement = $this->pdo->prepare("CALL up_registrar_grado(?)");
 		$statement->bindParam(1, $grado->__GET('grado'));
     	$statement -> execute();
 
+>>>>>>> 264948372fb8450d36114f350edddf4b6f632d7f
 		} catch (Exception $e)
 		{
 			die($e->getMessage());
@@ -33,10 +40,14 @@ class GradoDAO
 			$result = array();
 
 			$statement = $this->pdo->prepare("CALL up_buscar_grado(?)");
+<<<<<<< HEAD
+			$statement->bindParam(1,$grado->__GET('id_grado'));
+=======
 			//ASIGNAR A UNA VARIABLE TEMPORAL
     		$tempIdPeriodo = $grado->__GET("id_grado");
      		//EJECUTAR Y ENVIANDO LOS PARAMETROS TEMPORALES
 			$statement->bindParam(1, $tempIdPeriodo);
+>>>>>>> 264948372fb8450d36114f350edddf4b6f632d7f
 			$statement->execute();
 
 			foreach($statement->fetchAll(PDO::FETCH_OBJ) as $r)

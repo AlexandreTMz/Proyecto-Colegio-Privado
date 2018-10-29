@@ -1,6 +1,6 @@
 <?php
 require_once('../DAL/DBAccess.php');
-require_once('../BOL/notas.php');
+require_once('../BOL/nota.php');
 
 class NotasDAO
 {

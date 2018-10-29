@@ -1,14 +1,14 @@
 <?php
-class Competencia
+class Seccion
 {
-	private $id_competencia;
-	private $nombre_competencia;
-	private $numero_co;
+	private $id_seccion;
+	private $seccion;
 
 	public function __GET($x)
 	{
 		return $this->$x;
 	}
+
 	public function __SET($x, $y)
 	{
 		return $this->$x = $y;

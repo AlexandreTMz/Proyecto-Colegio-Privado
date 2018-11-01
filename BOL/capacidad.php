@@ -5,17 +5,18 @@ class Capacidad
 {
 	private $id_capacidad;
 	private $capacidad;
-	private $ent;
+	private $id_competencia;
 
-	public function __CONSTRUCT(){
-        $this->ent = new Competencia();
-		//echo $this->ent -> __GET('id_competencia');
-    }
+	public function __CONSTRUCT()
+	{
+		$this->id_competencia = new Competencia();
+	}
 
 	public function __GET($x)
 	{
 		return $this->$x;
 	}
+
 	public function __SET($x, $y)
 	{
 		return $this->$x = $y;

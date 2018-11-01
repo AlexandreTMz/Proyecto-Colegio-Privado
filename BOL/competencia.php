@@ -2,7 +2,7 @@
 class Competencia
 {
 	private $id_competencia;
-	private $nombre_competencia;
+	private $competencia;
 	private $numero_co;
 
 	public function __GET($x)

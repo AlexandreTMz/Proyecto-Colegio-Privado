@@ -12,3 +12,7 @@ INSERT INTO docentes VALUES ('1', '1', '1');
 INSERT INTO docentes VALUES ('2', '1', '1');
 
 INSERT INTO aulas VALUES (null, 'Prueba', '23', '43', 'm', '1', '1', '1');
+
+INSERT INTO competencias VALUES (null, 'Lectura', '1'), (null, 'Comprensión', '2');
+
+INSERT INTO capacidades VALUES (null, 'Diálogo', '1'), (null, 'Entiende', '2');

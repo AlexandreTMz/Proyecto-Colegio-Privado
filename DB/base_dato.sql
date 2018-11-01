@@ -44,7 +44,7 @@ CREATE TABLE docentes
   estado CHAR(1) NOT NULL,
   id_funcion INT(11) NOT NULL,
   CONSTRAINT fk_docentes_personas FOREIGN KEY (id_persona) REFERENCES personas(id_persona),
-  CONSTRAINT fk_personales_funciones FOREIGN KEY (id_funcion) REFERENCES funciones(id_funcion)
+  CONSTRAINT fk_docentes_funciones FOREIGN KEY (id_funcion) REFERENCES funciones(id_funcion)
 );
 
 CREATE TABLE IF NOT EXISTS notas
@@ -109,13 +109,13 @@ CREATE TABLE alumnos_rcalificaciones
   CONSTRAINT fk_alumnos_rcalificaciones_estudiantes FOREIGN KEY (id_estudiante) REFERENCES estudiantes(id_persona)
 );
 
-CREATE TABLE arcalificacion_notas
+CREATE TABLE arcalificaciones_notas
 (
   id_arcnotas INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   id_arcalificacion INT(11) NOT NULL,
   id_nota INT(11) NOT NULL,
-  CONSTRAINT fk_arcalificacion_notas_notas FOREIGN KEY (id_nota) REFERENCES notas(id_nota),
-  CONSTRAINT fk_arcalificacion_notas_alumnos_rcalificaciones FOREIGN KEY (id_arcalificacion) REFERENCES alumnos_rcalificaciones(id_arcalificacion)
+  CONSTRAINT fk_arcalificaciones_notas_notas FOREIGN KEY (id_nota) REFERENCES notas(id_nota),
+  CONSTRAINT fk_arcalificaciones_notas_alumnos_rcalificaciones FOREIGN KEY (id_arcalificacion) REFERENCES alumnos_rcalificaciones(id_arcalificacion)
 );
 
 CREATE TABLE aulas(
@@ -160,7 +160,7 @@ CREATE TABLE cursos_competencias
   id_curso INT(11) NOT NULL,
   id_competencia INT(11) NOT NULL,
   CONSTRAINT fk_cursos_competencias_cursos FOREIGN KEY (id_curso) REFERENCES cursos(id_curso),
-  CONSTRAINT fk_cursos_competencias_competencia FOREIGN KEY (id_competencia) REFERENCES competencias(id_competencia)
+  CONSTRAINT fk_cursos_competencias_competencias FOREIGN KEY (id_competencia) REFERENCES competencias(id_competencia)
 );
 
 CREATE TABLE capacidades
@@ -168,7 +168,7 @@ CREATE TABLE capacidades
   id_capacidad INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   capacidad VARCHAR(100) NOT NULL,
   id_competencia INT(11) NOT NULL,
-  CONSTRAINT fk_capacidades_competencia FOREIGN KEY (id_competencia) REFERENCES competencias(id_competencia)
+  CONSTRAINT fk_capacidades_competencias FOREIGN KEY (id_competencia) REFERENCES competencias(id_competencia)
 );
 
 CREATE TABLE apoderados
